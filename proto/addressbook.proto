@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package addressbook; 
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/kyleungat/go/addressbook/addressbookpb";
+
+message Person {
+    int32 id = 1;
+    string name = 2;
+    string email = 3;
+
+    enum PhoneType {
+        PHONETYPE_MOBILE = 0;
+        PHONETYPE_HOME = 1;
+        PHONETYPE_WORK = 2;
+    }
+
+    message PhoneNumber {
+        string number = 1;
+        PhoneType type = 2;
+    }
+
+    repeated PhoneNumber phones = 4;
+    google.protobuf.Timestamp last_updated = 5;
+}
+
+message AddressBook {
+    repeated Person people = 1;
+}
